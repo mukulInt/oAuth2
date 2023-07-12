@@ -1,24 +1,33 @@
 import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import Home from './component/Home';
+import Profile from './component/Profile';
+import OAuth2RedirectHandler from './component/OAuth2RedirectHandler';
+import PrivateRoute from './PrivateRoute';
+
+
+
 
 function App() {
+
+   const isAuthenticated = true;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+    <Router>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route
+        path="/profile/*"
+        element={<PrivateRoute element={Profile} isAuthenticated={isAuthenticated} />}
+      />
+      <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
+    </Routes>
+  </Router>
+    
   );
 }
 
