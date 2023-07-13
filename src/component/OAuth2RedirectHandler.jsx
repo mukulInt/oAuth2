@@ -80,9 +80,9 @@ const OAuth2RedirectHandler = () => {
 
     if (token) {
       localStorage.setItem("accessToken", token);
-      navigate('/profile');
+      // navigate('/profile');
     }else{
-      navigate('/');
+      // navigate('/');
     }
   }, []);
 
