@@ -1,12 +1,10 @@
-import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
+import { Route, Navigate } from "react-router-dom";
 
-function PrivateRoute({ path, element: Component, isAuthenticated }) {
-  return isAuthenticated ? (
-    <Route path={path} element={<Component />} />
-  ) : (
-    <Navigate to="/" replace />
-  );
-}
-
+const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
+	if (isAuthenticated) {
+		return <Route {...rest} element={<Component />} />;
+	} else {
+		return <Navigate to="/" replace />;
+	}
+};
 export default PrivateRoute;
